@@ -3,10 +3,8 @@ import AXIOS from "../config/AxiosConfig";
 const BASE_URI = "/Users";
 
 export default {
-  create: (token, payload) => {
-    return AXIOS.post(`${BASE_URI}`, payload, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+  create: payload => {
+    return AXIOS.post(`${BASE_URI}`, payload);
   },
   login: payload => {
     return AXIOS.post(`${BASE_URI}/login`, payload);

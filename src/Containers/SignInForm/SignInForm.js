@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 
 import { routes } from "../../config/Routing/routesLiterals";
@@ -11,15 +10,9 @@ import {
   validateFields,
   login
 } from "../../Ducks/LoginReducer/LoginReducer";
-
-const transition = `transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;`;
-
-const TransitionButton = styled.button`
-  ${transition}
-`;
+import { TransitionButton } from "../../Components/TransitionButton/TransitionButton";
 
 class SignInForm extends Component {
-  state = {};
   handleSubmit = event => {
     const { history, login } = this.props;
 
@@ -99,7 +92,7 @@ class SignInForm extends Component {
               disableSubmit
                 ? "bg-grey text-grey-darkest hover:bg-grey-dark"
                 : "bg-black text-yellow hover:bg-grey-darkest "
-            }`}
+              }`}
           >
             Submit
           </TransitionButton>
@@ -125,8 +118,7 @@ const mS = state => ({
   disableSubmit: state.login.disableSubmit,
   email: state.login.email,
   errors: state.login.errors,
-  password: state.login.password,
-  userId: state.auth.userId
+  password: state.login.password
 });
 
 const mD = {
