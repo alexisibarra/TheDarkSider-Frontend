@@ -1,10 +1,10 @@
 {
   "main.css": "/TheDarkSider_Frontend/static/css/main.63e05f4e.chunk.css",
-  "main.js": "/TheDarkSider_Frontend/static/js/main.49bec9df.chunk.js",
+  "main.js": "/TheDarkSider_Frontend/static/js/main.3ee6b493.chunk.js",
   "runtime~main.js": "/TheDarkSider_Frontend/static/js/runtime~main.e155172a.js",
-  "static/js/2.1647ccc0.chunk.js": "/TheDarkSider_Frontend/static/js/2.1647ccc0.chunk.js",
+  "static/js/2.ecd694ad.chunk.js": "/TheDarkSider_Frontend/static/js/2.ecd694ad.chunk.js",
   "index.html": "/TheDarkSider_Frontend/index.html",
-  "precache-manifest.586193eb8bf482080b10980c34ff6f73.js": "/TheDarkSider_Frontend/precache-manifest.586193eb8bf482080b10980c34ff6f73.js",
+  "precache-manifest.5d37b0fc9c5cc353d92b0277379360ad.js": "/TheDarkSider_Frontend/precache-manifest.5d37b0fc9c5cc353d92b0277379360ad.js",
   "service-worker.js": "/TheDarkSider_Frontend/service-worker.js",
   "static/media/siths.jpg": "/TheDarkSider_Frontend/static/media/siths.87506fe7.jpg"
 }

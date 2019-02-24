@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/TheDarkSider_Frontend/precache-manifest.586193eb8bf482080b10980c34ff6f73.js"
+  "/TheDarkSider_Frontend/precache-manifest.5d37b0fc9c5cc353d92b0277379360ad.js"
 );
 
 workbox.clientsClaim();
