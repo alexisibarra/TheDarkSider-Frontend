@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import auth from "../Ducks/AuthReducer/AuthReducerIndex";
+import auth from "./AuthReducer/AuthReducer";
 import user from "./CreateUserReducer/UserReducerIndex";
+import login from './LoginReducer/LoginReducer';
 
 const appReducer = combineReducers({
   auth,
-  user,
+  login,
+  user
 });
 
 const rootReducer = (state, action) => {
