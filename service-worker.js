@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/TheDarkSider-Backend/precache-manifest.baeae3c4a52bb6e87adfe615a81a4df5.js"
+  "/TheDarkSider_Frontend/precache-manifest.586193eb8bf482080b10980c34ff6f73.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/TheDarkSider-Backend/index.html", {
+workbox.routing.registerNavigationRoute("/TheDarkSider_Frontend/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
