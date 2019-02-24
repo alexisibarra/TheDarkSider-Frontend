@@ -61,8 +61,8 @@ export const login = _ => (dispatch, getState) => {
 };
 
 const initialState = {
-  email: "ar.ibarrasalas@gmail.com",
-  password: "password",
+  email: "",
+  password: "",
   errors: {},
   active: { email: false, password: false },
   disableSubmit: true
