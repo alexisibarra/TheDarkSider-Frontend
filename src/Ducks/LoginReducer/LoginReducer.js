@@ -1,15 +1,19 @@
+import UserAPI from "../../API/UserAPI";
+import { update as updateAuth } from "../AuthReducer/AuthReducer";
 // Constants
 export const ACTIONS = {
-  LOGIN: "login/UPDATE",
   UPDATE: "login/UPDATE",
-  LOGIN_ERROR: "login/LOGIN_ERROR",
-  LOGIN_SUCCESS: "login/LOGIN_SUCCESS"
+  CLEAR: "login/CLEAR"
 };
 
 // Actions
 export const updateLogin = payload => ({
   type: ACTIONS.UPDATE,
   payload
+});
+
+export const clear = _ => ({
+  type: ACTIONS.CLEAR
 });
 
 const validateEmail = email =>
@@ -35,11 +39,28 @@ export const validateFields = _ => (dispatch, getState) => {
   dispatch(updateLogin({ errors: newErrors, disableSubmit: disableSubmit }));
 };
 
+export const login = _ => (dispatch, getState) => {
+  const {
+    login: { email, password, errors }
+  } = getState();
+
+  return UserAPI.login({ user: { email, password } })
+    .then(({ data: { user: { _id: userId, email, token } } }) => {
+      return Promise.all([
+        dispatch(updateAuth({ userId, token, email })),
+        dispatch(clear())
+      ]);
+    })
+    .catch(response => {
+      const formErrors = response.response.data.errors.form;
+
+      dispatch(updateLogin({ errors: { ...errors, form: formErrors } }));
+    });
+};
+
 const initialState = {
-  success: false,
   email: "",
   password: "",
-  token: "",
   errors: {},
   active: { email: false, password: false },
   disableSubmit: true
@@ -49,16 +70,9 @@ const LoginReducer = (state = initialState, action) => {
   const { payload, type } = action;
 
   switch (type) {
-    case ACTIONS.LOGIN_SUCCESS: {
+    case ACTIONS.CLEAR: {
       return {
-        ...initialState,
-        success: true
-      };
-    }
-    case ACTIONS.LOGIN_ERROR: {
-      return {
-        success: false,
-        error: payload
+        ...initialState
       };
     }
     case ACTIONS.UPDATE: {
