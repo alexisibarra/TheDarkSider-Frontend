@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://alexisibarra.github.io/TheDarkSider-Backend/",
+  "homepage": "https://alexisibarra.github.io/TheDarkSider_Frontend/",
   "dependencies": {
     "axios": "^0.18.0",
     "eslint-config-prettier": "^3.0.1",
