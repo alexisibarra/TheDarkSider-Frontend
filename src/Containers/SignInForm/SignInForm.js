@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -8,9 +8,9 @@ import { routes } from "../../config/Routing/routesLiterals";
 import Input from "../../Components/Input/Input";
 import {
   updateLogin,
-  validateFields
+  validateFields,
+  login
 } from "../../Ducks/LoginReducer/LoginReducer";
-import { login } from "../../Ducks/AuthReducer/AuthReducer";
 
 const transition = `transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;`;
 
@@ -20,21 +20,23 @@ const TransitionButton = styled.button`
 
 class SignInForm extends Component {
   state = {};
-
   handleSubmit = event => {
-    const { history } = this.props;
+    const { history, login } = this.props;
 
     event.preventDefault();
-    history.push(routes.darkside);
+
+    login().then(_ => {
+      history.push(routes.darkside);
+    });
   };
 
   handleChange = event => {
     const { value, name } = event.target;
     const { updateLogin, validateFields } = this.props;
 
-    validateFields();
-
     updateLogin({ [name]: value });
+
+    validateFields();
   };
 
   render() {
@@ -49,53 +51,60 @@ class SignInForm extends Component {
     } = this.props;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          inputClasses={"mb-2"}
-          label="Email"
-          type="email"
-          name="email"
-          value={email}
-          error={errors.email}
-          onChange={this.handleChange}
-          active={active.email}
-          onBlur={_ => updateLogin({ active: { ...active, email: false } })}
-          onFocus={_ => {
-            updateLogin({ active: { ...active, email: true } });
-            validateFields();
-          }}
-        />
+      <Fragment>
+        {this.props.errors.form && (
+          <h4 className="text-red m-4">{this.props.errors.form}</h4>
+        )}
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            inputClasses={"mb-2"}
+            label="Email"
+            type="email"
+            name="email"
+            value={email}
+            error={errors.email}
+            onChange={this.handleChange}
+            active={active.email}
+            onBlur={_ => updateLogin({ active: { ...active, email: false } })}
+            onFocus={_ => {
+              updateLogin({ active: { ...active, email: true } });
+              validateFields();
+            }}
+          />
 
-        <Input
-          inputClasses={"mb-2"}
-          label="Password"
-          name="password"
-          type="password"
-          value={password}
-          error={errors.password}
-          onChange={this.handleChange}
-          active={active.password}
-          onBlur={_ => updateLogin({ active: { ...active, password: false } })}
-          onFocus={_ => {
-            updateLogin({ active: { ...active, password: true } });
-            validateFields();
-          }}
-        />
+          <Input
+            inputClasses={"mb-2"}
+            label="Password"
+            name="password"
+            type="password"
+            value={password}
+            error={errors.password}
+            onChange={this.handleChange}
+            active={active.password}
+            onBlur={_ =>
+              updateLogin({ active: { ...active, password: false } })
+            }
+            onFocus={_ => {
+              updateLogin({ active: { ...active, password: true } });
+              validateFields();
+            }}
+          />
 
-        <TransitionButton
-          type="submit"
-          readOnly
-          disabled={disableSubmit}
-          onClick={this.handleSubmit}
-          className={`w-full my-2 outline-none rounded-sm  p-4 ${
-            disableSubmit
-              ? "bg-grey text-grey-darkest hover:bg-grey-dark"
-              : "bg-black text-yellow hover:bg-grey-darkest "
-          }`}
-        >
-          Submit
-        </TransitionButton>
-      </form>
+          <TransitionButton
+            type="submit"
+            readOnly
+            disabled={disableSubmit}
+            onClick={this.handleSubmit}
+            className={`w-full my-2 outline-none rounded-sm  p-4 ${
+              disableSubmit
+                ? "bg-grey text-grey-darkest hover:bg-grey-dark"
+                : "bg-black text-yellow hover:bg-grey-darkest "
+            }`}
+          >
+            Submit
+          </TransitionButton>
+        </form>
+      </Fragment>
     );
   }
 }
