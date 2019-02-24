@@ -16,7 +16,7 @@ const AuthenticatedRoute = ({
       ) : (
         <Redirect
           to={{
-            pathname: routes.login,
+            pathname: routes.signin,
             state: { from: args.location }
           }}
         />

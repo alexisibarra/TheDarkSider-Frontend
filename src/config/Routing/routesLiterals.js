@@ -1,5 +1,5 @@
 export const routes = {
-  root: "/",
+  darkside: "/",
   signup: "/signup",
-  signin: "/signin",
+  signin: "/signin"
 };

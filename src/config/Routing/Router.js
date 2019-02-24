@@ -5,17 +5,15 @@ import { PropTypes } from "prop-types";
 
 import { routes } from "./routesLiterals";
 
-import { isUserLoggedIn } from "../../Ducks/AuthReducer/AuthReducerIndex";
+import { isUserLoggedIn } from "../../Ducks/AuthReducer/AuthReducer";
 
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import UnauthenticatedRoute from "./UnauthenticatedRoute";
 
-
-// import CreateRoomPage from "../../Pages/Resources/Rooms/CreateRoomPage/CreateRoomPage";
-import Error404Page from '../../Pages/Error404Page/Error404Page';
-import SignInPage from '../../Pages/SIgnInPage/SignInPage';
-import SignUpPage from '../../Pages/SignUpPage/SignUpPage';
-
+import Error404Page from "../../Pages/Error404Page/Error404Page";
+import SignInPage from "../../Pages/SIgnInPage/SignInPage";
+import SignUpPage from "../../Pages/SignUpPage/SignUpPage";
+import DarksidePage from "../../Pages/DarksidePage/DarksidePage";
 const Router = ({ userIsLoggedIn }) => {
   return (
     <BrowserRouter>
@@ -23,36 +21,19 @@ const Router = ({ userIsLoggedIn }) => {
         <UnauthenticatedRoute
           path={routes.signup}
           userIsLoggedIn={userIsLoggedIn}
-          component={({ ...props }) => {
-            return (
-              <SignUpPage />
-            );
-          }}
+          component={({ ...props }) => <SignUpPage />}
         />
         <UnauthenticatedRoute
-          path={routes.login}
+          path={routes.signin}
           userIsLoggedIn={userIsLoggedIn}
-          component={({ ...props }) => (
-            <SignInPage />
-          )}
+          component={({ ...props }) => <SignInPage />}
         />
-        {/* <AuthenticatedRoute
-          path={routes.newRoom(":id")}
+        <AuthenticatedRoute
+          path={routes.darkside}
           userIsLoggedIn={userIsLoggedIn}
-          component={({ ...props }) => {
-            return (
-              <CreateRoomPage />
-            );
-          }}
-        /> */}
-        {/* <Route
-          path={routes.root}
-          render={_ => (
-            <FrontLayout unpadded>
-              <FrontHomePage />
-            </FrontLayout>
-          )}
-        /> */}
+          component={({ ...props }) => <DarksidePage />}
+        />
+
         <Route component={Error404Page} />
       </Switch>
     </BrowserRouter>
