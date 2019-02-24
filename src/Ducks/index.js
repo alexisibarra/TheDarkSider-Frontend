@@ -3,10 +3,12 @@ import auth from "./AuthReducer/AuthReducer";
 import user from "./CreateUserReducer/UserReducerIndex";
 import login from "./LoginReducer/LoginReducer";
 import signup from "./SignUpReducer/SignUpReducer";
+import modal from "./ModalReducer/ModalReducer";
 
 const appReducer = combineReducers({
   auth,
   login,
+  modal,
   signup,
   user
 });
