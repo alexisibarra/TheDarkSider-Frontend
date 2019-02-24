@@ -1,4 +1,3 @@
-import UserAPI from "../../API/UserAPI";
 import { createSelector } from "reselect";
 
 // Constants
@@ -18,14 +17,6 @@ export const clear = _ => ({
   type: ACTIONS.CLEAR
 });
 
-export const login = payload => dispatch => {
-  return UserAPI.login(payload).then(
-    ({ data: { id: token, userId, firstName, lastName, role } }) => {
-      dispatch(update({ userId, token, firstName, lastName, role }));
-    }
-  );
-};
-
 export const logout = _ => dispatch => {
   return dispatch(clear());
 };
@@ -33,25 +24,16 @@ export const logout = _ => dispatch => {
 // Selectors
 
 const getToken = ({ auth: { token } }) => token;
-const getFullname = ({ auth: { firstName, lastName } }) =>
-  `${firstName} ${lastName}`;
 
 export const isUserLoggedIn = createSelector(
   [getToken],
   token => !!token
 );
 
-export const getUserFullName = createSelector(
-  [getFullname],
-  fullName => fullName
-);
-
 const initialState = {
   userId: "",
   token: "",
-  role: "",
-  firstName: "",
-  lastName: ""
+  email: ""
 };
 
 const AuthReducer = (state = initialState, action) => {
