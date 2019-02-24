@@ -1,5 +1,6 @@
 import UserAPI from "../../API/UserAPI";
-import { update as updateAuth } from "../AuthReducer/AuthReducer";
+import { open as openModal } from "../ModalReducer/ModalReducer";
+
 // Constants
 export const ACTIONS = {
   UPDATE: "signup/UPDATE",
@@ -50,7 +51,12 @@ export const signup = _ => (dispatch, getState) => {
   } = getState();
 
   return UserAPI.create({ user: { email, password } })
-    .then(_ => dispatch(clear()))
+    .then(_ =>
+      Promise.all([
+        dispatch(clear()),
+        dispatch(openModal("You're a darksider now!"))
+      ])
+    )
     .catch(error => {
       dispatch(
         update({ errors: { ...errors, form: error.response.data.error } })

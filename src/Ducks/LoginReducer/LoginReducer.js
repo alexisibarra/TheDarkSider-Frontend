@@ -1,5 +1,6 @@
 import UserAPI from "../../API/UserAPI";
 import { update as updateAuth } from "../AuthReducer/AuthReducer";
+import { open as openModal } from "../ModalReducer/ModalReducer";
 // Constants
 export const ACTIONS = {
   UPDATE: "login/UPDATE",
@@ -48,7 +49,8 @@ export const login = _ => (dispatch, getState) => {
     .then(({ data: { user: { _id: userId, email, token } } }) => {
       return Promise.all([
         dispatch(updateAuth({ userId, token, email })),
-        dispatch(clear())
+        dispatch(clear()),
+        dispatch(openModal("Welcome to the Dark Side"))
       ]);
     })
     .catch(response => {
@@ -59,8 +61,8 @@ export const login = _ => (dispatch, getState) => {
 };
 
 const initialState = {
-  email: "",
-  password: "",
+  email: "ar.ibarrasalas@gmail.com",
+  password: "password",
   errors: {},
   active: { email: false, password: false },
   disableSubmit: true
