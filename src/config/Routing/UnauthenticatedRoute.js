@@ -12,7 +12,7 @@ const UnauthenticatedRoute = ({
     {...rest}
     render={props =>
       userIsLoggedIn ? (
-        <Redirect to={{ pathname: routes.dashboard }} />
+        <Redirect to={{ pathname: routes.signin }} />
       ) : (
         <Component {...props} />
       )
