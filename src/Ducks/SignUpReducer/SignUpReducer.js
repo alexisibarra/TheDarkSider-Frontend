@@ -22,7 +22,7 @@ const validateEmail = email =>
 const validatePassword = password => password.length < 8;
 
 export const validateFields = _ => (dispatch, getState) => {
-  const { password, email } = getState().signup;
+  const { password, passwordConfirmation, email } = getState().signup;
   const newErrors = {};
   let disableSubmit = false;
 
@@ -34,6 +34,11 @@ export const validateFields = _ => (dispatch, getState) => {
   if (validatePassword(password)) {
     disableSubmit = true;
     newErrors.password = "Password must be at least 8 characters";
+  }
+
+  if (password !== passwordConfirmation) {
+    disableSubmit = true;
+    newErrors.passwordConfirmation = "Password confirmation must match";
   }
 
   dispatch(update({ errors: newErrors, disableSubmit: disableSubmit }));
@@ -56,6 +61,7 @@ export const signup = _ => (dispatch, getState) => {
 const initialState = {
   email: "",
   password: "",
+  passwordConfirmation: "",
   errors: {},
   active: { email: false, password: false },
   disableSubmit: true

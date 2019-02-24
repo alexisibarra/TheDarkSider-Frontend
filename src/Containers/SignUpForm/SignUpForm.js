@@ -38,6 +38,7 @@ class SignUpForm extends Component {
   render() {
     const {
       password,
+      passwordConfirmation,
       email,
       errors,
       update,
@@ -84,6 +85,24 @@ class SignUpForm extends Component {
             }}
           />
 
+          <Input
+            inputClasses={"mb-2"}
+            label="Password Confirmation"
+            type="password"
+            name="passwordConfirmation"
+            value={passwordConfirmation}
+            error={errors.passwordConfirmation}
+            onChange={this.handleChange}
+            active={active.passwordConfirmation}
+            onBlur={_ =>
+              update({ active: { ...active, passwordConfirmation: false } })
+            }
+            onFocus={_ => {
+              update({ active: { ...active, passwordConfirmation: true } });
+              validateFields();
+            }}
+          />
+
           <TransitionButton
             type="submit"
             readOnly
@@ -112,7 +131,8 @@ const mS = state => ({
   disableSubmit: state.signup.disableSubmit,
   email: state.signup.email,
   errors: state.signup.errors,
-  password: state.signup.password
+  password: state.signup.password,
+  passwordConfirmation: state.signup.passwordConfirmation
 });
 
 const mD = { signup, update, validateFields };
