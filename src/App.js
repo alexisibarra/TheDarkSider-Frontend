@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
+import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 
 import { persistor, store } from "./store";
-import Router from './config/Routing/Router';
+import Router from "./config/Routing/Router";
+import styled from "styled-components";
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <Router />
-        </PersistGate>
-      </Provider>
-    );
-  }
-}
+import "./styles/tailwind.css";
+
+const Layout = styled.div`
+  background-color: #191919;
+`;
+
+const App = _ => (
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <Layout className="text-center min-h-screen flex flex-col items-center justify-center text-white">
+        <Router />
+      </Layout>
+    </PersistGate>
+  </Provider>
+);
 
 export default App;
