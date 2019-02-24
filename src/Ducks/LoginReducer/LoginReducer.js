@@ -12,12 +12,37 @@ export const updateLogin = payload => ({
   payload
 });
 
+const validateEmail = email =>
+  !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email) || email.lentgh === 0;
+
+const validatePassword = password => password.length < 8;
+
+export const validateFields = _ => (dispatch, getState) => {
+  const { password, email } = getState().login;
+  const newErrors = {};
+  let disableSubmit = false;
+
+  if (validateEmail(email)) {
+    newErrors.email = "Invalid email";
+    disableSubmit = true;
+  }
+
+  if (validatePassword(password)) {
+    disableSubmit = true;
+    newErrors.password = "Password must be at least 8 characters";
+  }
+
+  dispatch(updateLogin({ errors: newErrors, disableSubmit: disableSubmit }));
+};
+
 const initialState = {
   success: false,
   email: "",
   password: "",
   token: "",
-  errors: {}
+  errors: {},
+  active: { email: false, password: false },
+  disableSubmit: true
 };
 
 const LoginReducer = (state = initialState, action) => {

@@ -36,7 +36,10 @@ const getToken = ({ auth: { token } }) => token;
 const getFullname = ({ auth: { firstName, lastName } }) =>
   `${firstName} ${lastName}`;
 
-export const isUserLoggedIn = createSelector([getToken], token => !!token);
+export const isUserLoggedIn = createSelector(
+  [getToken],
+  token => !!token
+);
 
 export const getUserFullName = createSelector(
   [getFullname],
@@ -51,7 +54,7 @@ const initialState = {
   lastName: ""
 };
 
-const AuthReducers = (state = initialState, action) => {
+const AuthReducer = (state = initialState, action) => {
   const { payload, type } = action;
 
   switch (type) {
@@ -72,4 +75,4 @@ const AuthReducers = (state = initialState, action) => {
   }
 };
 
-export default AuthReducers;
+export default AuthReducer;
