@@ -1,0 +1,21 @@
+{
+    "extends": [
+        "react-app",
+        "prettier",
+        "prettier/react",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "react/prop-types": "error",
+        "react/prefer-stateless-function": "error",
+        "react/no-deprecated": 0,
+        "jsx-a11y/href-no-hash": "off",
+        "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+    }
+}
